@@ -4,7 +4,7 @@ from cianparser.constants import *
 offer_types = {"rent_long", "rent_short", "sale"}
 offer_not_implemented_yet = {"rent_short", "sale"}
 
-accommodation_types = {"flat", "room", "house", "house-part", "townhouse"}
+accommodation_types = {"flat", "room", "house", "house-part", "townhouse", "suburban"}
 accommodation_not_implemented_yet = {"room", "house", "house-part", "townhouse"}
 
 
@@ -12,7 +12,7 @@ def list_cities():
     return CITIES
 
 
-def parse(offer, accommodation, location, rooms="all", start_page=1, end_page=100):
+def parse(offer, accommodation, location, rooms="all", start_page=1, end_page=100, additional_params=""):
     """
     Parse information from cian website
     Examples:
@@ -20,7 +20,7 @@ def parse(offer, accommodation, location, rooms="all", start_page=1, end_page=10
         >>> data = cianparser.parse(offer="rent_short", accommodation="flat", location="Москва", rooms=(1,3,"studio"))
         >>> data = cianparser.parse(offer="sale", accommodation="house", location="Санкт-Петербург", rooms="all")
     :param str offer: type of offer, e.g. "rent_long", "rent_short", "sale"
-    :param str accommodation: type of accommodation, e.g. "flat", "room", "house", "house-part", "townhouse"
+    :param str accommodation: type of accommodation, e.g. "flat", "room", "house", "house-part", "townhouse", "suburban"
     :param str location: location. e.g. "Казань", for see all correct values use cianparser.list_cities()
     :param rooms: how many rooms in accommodation, default "all". Example 1, (1,3, "studio"), "studio, "all"
     :param start_page: the page from which the parser starts, default 1
@@ -75,7 +75,7 @@ def parse(offer, accommodation, location, rooms="all", start_page=1, end_page=10
         print("Sorry. This functionality has not yet been implemented, but it is planned...")
         return []
     else:
-        parser = ParserRentOffers(type_offer=offer, type_accommodation=accommodation, location_id=location_id, rooms=rooms, start_page=start_page, end_page=end_page)
+        parser = ParserRentOffers(type_offer=offer, type_accommodation=accommodation, location_id=location_id, rooms=rooms, start_page=start_page, end_page=end_page, additional_params=additional_params)
         parser.run()
         print('\n')
 
